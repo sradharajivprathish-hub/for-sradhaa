@@ -1,0 +1,83 @@
+Final Improvements and Fixes
+
+Please make the following improvements to the website:
+
+1. Fix the Number Guessing Game
+
+The Number Guessing Game is not working properly.
+
+Please fix all the issues and ensure that:
+
+- The game functions correctly.
+- The random number is generated properly.
+- User guesses are validated accurately.
+- "Too High" and "Too Low" hints work correctly.
+- The winning condition is detected properly.
+- The game can be restarted without any bugs.
+- The overall gameplay is smooth and responsive.
+
+---
+
+2. Keep Everything Inside the Website
+
+The "More Games" button currently opens another tab or redirects to a different page.
+
+I don't want that.
+
+Instead:
+
+- Keep every game inside the same website.
+- No external links.
+- No new browser tabs.
+- Every game should open as an in-app page or modal with smooth transitions.
+
+The entire experience should feel like one complete application.
+
+---
+
+3. Add Real-Time Voice Chat
+
+I would like to add a real-time voice chat feature.
+
+Requirements:
+
+- When both users are online, they should be able to start a voice conversation directly from the website.
+- My microphone audio should be heard instantly by the other user.
+- The other user's microphone audio should be heard instantly by me.
+- The voice connection should be low-latency and work in real time.
+- Include buttons to:
+  - Mute/Unmute microphone
+  - Start Voice Chat
+  - End Voice Chat
+- Show clear indicators when:
+  - Voice chat is connected
+  - The microphone is muted
+  - The other user is speaking
+- The voice chat should only be available between the two registered users and remain completely private.
+
+---
+
+4. Remove the Background Music
+
+Please remove the background music completely.
+
+I no longer want background music on the website.
+
+If any music controls remain:
+
+- Turning the music off should stop it completely.
+- It should never start playing again automatically.
+- Refreshing the page should not restart the music.
+- There should be no autoplay.
+
+The website should be completely silent unless we intentionally start a voice chat.
+
+---
+
+Final Goal
+
+Make the website feel polished, seamless, and premium.
+
+Every feature should work smoothly without bugs.
+
+The website should feel like our own private digital space where we can chat, play games, make voice calls, and create beautiful memories together—all within a single, elegant experience.
