@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "For Sradhaa 💕"
+version = "1.0.0"
+id = "artifacts/for-sradhaa"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26013
+
+[services.development]
+run = "pnpm --filter @workspace/for-sradhaa run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/for-sradhaa", "run", "build" ]
+publicDir = "artifacts/for-sradhaa/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26013"
+BASE_PATH = "/"
