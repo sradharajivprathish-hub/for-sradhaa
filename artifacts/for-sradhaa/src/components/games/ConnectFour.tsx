@@ -1,100 +1,121 @@
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import type { GameRoom } from "@/hooks/useGameSocket";
 
-interface Props {
-  room: GameRoom;
-  myPhone: string;
-  getName: (p: string) => string;
-  onMove: (move: Record<string, unknown>) => void;
-  onRestart: () => void;
-  onLeave: () => void;
+const ROWS = 6, COLS = 7;
+type Cell = 0 | 1 | 2;
+
+function emptyBoard(): Cell[][] {
+  return Array.from({ length: ROWS }, () => Array(COLS).fill(0) as Cell[]);
 }
 
-const COLORS = ["hsl(345 80% 60%)", "hsl(200 80% 55%)"];
+function checkWin(board: Cell[][], row: number, col: number, p: Cell): boolean {
+  const dirs = [[0,1],[1,0],[1,1],[1,-1]];
+  for (const [dr, dc] of dirs) {
+    let count = 1;
+    for (const sign of [1, -1]) {
+      let r = row + dr * sign, c = col + dc * sign;
+      while (r >= 0 && r < ROWS && c >= 0 && c < COLS && board[r][c] === p) {
+        count++; r += dr * sign; c += dc * sign;
+      }
+    }
+    if (count >= 4) return true;
+  }
+  return false;
+}
 
-export function ConnectFour({ room, myPhone, getName, onMove, onRestart, onLeave }: Props) {
-  const state = room.state as {
-    board: (string | null)[][];
-    turn: string;
-    winner: string | null;
-    status: string;
-    scores: Record<string, number>;
-  };
+export function ConnectFour() {
+  const [board, setBoard] = useState<Cell[][]>(emptyBoard);
+  const [turn, setTurn] = useState<1 | 2>(1);
+  const [winner, setWinner] = useState<Cell | null>(null);
+  const [scores, setScores] = useState({ 1: 0, 2: 0 });
 
-  const isMyTurn = state.turn === myPhone;
-  const winner = state.winner;
-  const myColor = COLORS[room.players.indexOf(myPhone)];
-  const isDraw = winner === "draw";
-  const iWon = winner === myPhone;
-
-  function getColor(phone: string | null) {
-    if (!phone) return "hsl(var(--muted))";
-    return COLORS[room.players.indexOf(phone)] ?? "hsl(var(--muted))";
+  function drop(col: number) {
+    if (winner) return;
+    let row = -1;
+    for (let r = ROWS - 1; r >= 0; r--) { if (board[r][col] === 0) { row = r; break; } }
+    if (row === -1) return;
+    const nb = board.map(r => [...r]) as Cell[][];
+    nb[row][col] = turn;
+    const won = checkWin(nb, row, col, turn);
+    if (won) { setScores(s => ({ ...s, [turn]: s[turn] + 1 })); setWinner(turn); }
+    setBoard(nb);
+    if (!won) setTurn(t => t === 1 ? 2 : 1);
   }
 
+  function reset() { setBoard(emptyBoard()); setTurn(1); setWinner(null); }
+
+  const cellColor = (v: Cell) =>
+    v === 1 ? "bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.7)]" :
+    v === 2 ? "bg-yellow-400 shadow-[0_0_8px_rgba(234,179,8,0.7)]" : "bg-white/5";
+
   return (
-    <div className="flex flex-col items-center gap-5 w-full max-w-md mx-auto">
+    <div className="flex flex-col items-center gap-4 py-4">
       {/* Scores */}
-      <div className="flex justify-between w-full gap-4">
-        {room.players.map((p, i) => (
-          <div key={p} className="flex-1 rounded-2xl p-3 text-center" style={{ background: state.turn === p && !winner ? `${COLORS[i]}20` : "hsl(var(--card))", border: `1.5px solid ${COLORS[i]}40` }}>
-            <div className="w-5 h-5 rounded-full mx-auto mb-1" style={{ background: COLORS[i] }} />
-            <p className="text-xs text-muted-foreground">{getName(p)}{p === myPhone ? " (you)" : ""}</p>
-            <p className="font-serif text-xl text-primary">{state.scores?.[p] ?? 0}</p>
+      <div className="flex gap-8 text-center">
+        <div>
+          <div className="w-3 h-3 rounded-full bg-rose-500 mx-auto mb-1" />
+          <p className="text-xs text-muted-foreground">Prathish</p>
+          <p className="font-serif text-2xl text-rose-400">{scores[1]}</p>
+        </div>
+        <div>
+          <div className="w-3 h-3 rounded-full bg-yellow-400 mx-auto mb-1" />
+          <p className="text-xs text-muted-foreground">Sradhaan</p>
+          <p className="font-serif text-2xl text-yellow-300">{scores[2]}</p>
+        </div>
+      </div>
+
+      {/* Status */}
+      <AnimatePresence mode="wait">
+        <motion.p
+          key={String(winner) + turn}
+          className="text-sm"
+          initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+        >
+          {winner ? `🎉 ${winner === 1 ? "Prathish" : "Sradhaan"} wins!` : `${turn === 1 ? "🔴 Prathish" : "🟡 Sradhaan"}'s turn`}
+        </motion.p>
+      </AnimatePresence>
+
+      {/* Column buttons */}
+      <div className="flex gap-1">
+        {Array.from({ length: COLS }).map((_, col) => (
+          <motion.button
+            key={col}
+            onClick={() => drop(col)}
+            className="w-9 h-6 text-xs text-primary/40 hover:text-primary transition-colors"
+            whileHover={{ y: -2 }}
+            disabled={!!winner}
+          >
+            ▼
+          </motion.button>
+        ))}
+      </div>
+
+      {/* Board */}
+      <div
+        className="rounded-2xl p-2 border border-white/10"
+        style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(8px)" }}
+      >
+        {board.map((row, ri) => (
+          <div key={ri} className="flex gap-1 mb-1">
+            {row.map((cell, ci) => (
+              <motion.div
+                key={ci}
+                className={`w-9 h-9 rounded-full ${cellColor(cell)} transition-all duration-200`}
+                animate={cell !== 0 ? { scale: [0, 1.15, 1] } : {}}
+                transition={{ duration: 0.25, type: "spring" }}
+              />
+            ))}
           </div>
         ))}
       </div>
 
-      <AnimatePresence mode="wait">
-        {winner ? (
-          <motion.p key="result" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="font-serif text-xl text-center">
-            {isDraw ? "It's a draw! 🤝" : iWon ? "You win! 🎉" : `${getName(winner)} wins! 💪`}
-          </motion.p>
-        ) : (
-          <motion.p key="turn" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-sm text-muted-foreground">
-            {isMyTurn ? <span className="font-medium" style={{ color: myColor }}>Your turn — click a column</span> : `${getName(state.turn)}'s turn…`}
-          </motion.p>
-        )}
-      </AnimatePresence>
-
-      {/* Board */}
-      <div className="rounded-3xl p-3 w-full" style={{ background: "hsl(220 60% 18%)" }}>
-        <div className="grid grid-cols-7 gap-1.5">
-          {/* Column headers */}
-          {Array.from({ length: 7 }, (_, col) => (
-            <motion.button
-              key={`h${col}`}
-              onClick={() => !winner && isMyTurn && onMove({ col })}
-              className="h-5 rounded-full flex items-center justify-center"
-              style={{ background: isMyTurn && !winner ? `${myColor}40` : "transparent", cursor: isMyTurn && !winner ? "pointer" : "default" }}
-              whileHover={isMyTurn && !winner ? { background: `${myColor}70` } : {}}
-            >
-              {isMyTurn && !winner && <span className="text-[8px]" style={{ color: myColor }}>▼</span>}
-            </motion.button>
-          ))}
-          {/* Cells */}
-          {state.board?.map((row, r) =>
-            row.map((cell, c) => (
-              <motion.div
-                key={`${r}-${c}`}
-                className="aspect-square rounded-full"
-                style={{ background: cell ? getColor(cell) : "hsl(220 50% 25%)", boxShadow: cell ? `0 2px 8px ${getColor(cell)}60` : "none" }}
-                initial={false}
-                animate={{ scale: cell ? [1.2, 1] : 1 }}
-                transition={{ type: "spring", bounce: 0.4 }}
-              />
-            ))
-          )}
-        </div>
-      </div>
-
-      {winner && (
-        <div className="flex gap-3 w-full">
-          <button onClick={onRestart} className="flex-1 py-3 rounded-2xl bg-primary text-primary-foreground text-sm font-medium">Play Again</button>
-          <button onClick={onLeave} className="flex-1 py-3 rounded-2xl border border-primary/20 text-sm text-muted-foreground">Leave</button>
-        </div>
-      )}
-      {!winner && <button onClick={onLeave} className="text-xs text-muted-foreground/50 hover:text-muted-foreground">← Leave game</button>}
+      <motion.button
+        onClick={reset}
+        className="px-6 py-2.5 rounded-full border border-primary/30 text-sm text-primary hover:bg-primary/10 transition-colors"
+        whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
+      >
+        New Game
+      </motion.button>
     </div>
   );
 }

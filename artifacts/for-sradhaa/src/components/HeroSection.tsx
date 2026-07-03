@@ -1,136 +1,148 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const LETTERS = "Sradhaa".split("");
-const SUBTITLE = "Every heartbeat of mine has been writing your name since the day we met.";
+const LETTERS = "Sradhaan".split("");
+const SUBTITLE = "A love that began in silence, growing louder every day.";
 
-function useTypewriter(text: string, speed = 40, startDelay = 2400) {
+function useTypewriter(text: string, speed = 45, startDelay = 2800) {
   const [displayed, setDisplayed] = useState("");
   const [done, setDone] = useState(false);
   useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
+    let t: ReturnType<typeof setTimeout>;
     let i = 0;
-    timeout = setTimeout(() => {
-      const interval = setInterval(() => {
+    t = setTimeout(() => {
+      const iv = setInterval(() => {
         i++;
         setDisplayed(text.slice(0, i));
-        if (i >= text.length) { clearInterval(interval); setDone(true); }
+        if (i >= text.length) { clearInterval(iv); setDone(true); }
       }, speed);
     }, startDelay);
-    return () => clearTimeout(timeout);
+    return () => clearTimeout(t);
   }, [text, speed, startDelay]);
   return { displayed, done };
 }
 
-function FloatingHeart({ x, y, size, delay, duration }: { x: number; y: number; size: number; delay: number; duration: number }) {
-  return (
-    <motion.div
-      className="absolute pointer-events-none select-none"
-      style={{ left: `${x}%`, top: `${y}%`, fontSize: size }}
-      animate={{ y: [0, -30, 0], opacity: [0, 0.5, 0], scale: [0.8, 1.1, 0.8] }}
-      transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
-    >
-      ❤️
-    </motion.div>
-  );
-}
-
-const HEARTS = Array.from({ length: 16 }, (_, i) => ({
-  x: 5 + Math.random() * 90, y: 10 + Math.random() * 80,
-  size: 10 + Math.random() * 14, delay: Math.random() * 5, duration: 4 + Math.random() * 4, id: i,
+const STARS = Array.from({ length: 40 }, (_, i) => ({
+  id: i, x: Math.random() * 100, y: Math.random() * 100,
+  size: 1 + Math.random() * 2,
+  dur: 2 + Math.random() * 4, delay: Math.random() * 5,
 }));
 
-function StarParticle({ x, y, size, delay, duration }: { x: number; y: number; size: number; delay: number; duration: number }) {
-  return (
-    <motion.div
-      className="absolute rounded-full bg-primary/40 pointer-events-none"
-      style={{ left: `${x}%`, top: `${y}%`, width: size, height: size }}
-      animate={{ y: [0, -20, 0], opacity: [0, 0.8, 0], scale: [0.5, 1.3, 0.5] }}
-      transition={{ duration, delay, repeat: Infinity, ease: "easeInOut" }}
-    />
-  );
-}
-
-const STARS = Array.from({ length: 32 }, (_, i) => ({
-  x: Math.random() * 100, y: Math.random() * 100,
-  size: 1.5 + Math.random() * 3, delay: Math.random() * 5, duration: 3 + Math.random() * 3, id: i,
+const PARTICLES = Array.from({ length: 24 }, (_, i) => ({
+  id: i, x: Math.random() * 100, y: Math.random() * 100,
+  size: 2 + Math.random() * 4, dur: 3 + Math.random() * 3, delay: Math.random() * 4,
 }));
 
 export function HeroSection() {
-  const { displayed, done: subtitleDone } = useTypewriter(SUBTITLE, 36, 2200);
-  const [showBadge, setShowBadge] = useState(false);
-  const [showPulse, setShowPulse] = useState(false);
+  const { displayed, done } = useTypewriter(SUBTITLE, 38, 2200);
+  const [showDate, setShowDate] = useState(false);
+  const [showHeart, setShowHeart] = useState(false);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setShowPulse(true), 1800);
-    const t2 = setTimeout(() => setShowBadge(true), 5200);
+    const t1 = setTimeout(() => setShowHeart(true), 1800);
+    const t2 = setTimeout(() => setShowDate(true), 4800);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
   return (
     <section className="relative min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden">
-      {/* Aurora background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse 70% 60% at 50% 40%, hsl(345 80% 88% / 0.55), transparent 68%)" }}
-          animate={{ scale: [1, 1.08, 1], opacity: [0.7, 1, 0.7] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse 50% 40% at 30% 70%, hsl(280 60% 85% / 0.2), transparent 60%)" }}
-          animate={{ scale: [1.05, 1, 1.05], opacity: [0.3, 0.7, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        />
-        <motion.div
-          className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse 40% 35% at 70% 30%, hsl(20 80% 88% / 0.2), transparent 60%)" }}
-          animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.8, 0.4] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        />
-      </div>
+
+      {/* Animated gradient bg */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 70% 55% at 50% 45%, hsl(345 70% 88% / 0.4), transparent 70%)" }}
+        animate={{ scale: [1, 1.06, 1], opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Aurora effect */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 100% 30% at 50% 80%, rgba(244,63,94,0.08), transparent 70%)" }}
+        animate={{ opacity: [0.3, 0.8, 0.3], y: [0, -20, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse 60% 20% at 30% 20%, rgba(167,139,250,0.06), transparent 70%)" }}
+        animate={{ opacity: [0.2, 0.6, 0.2] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+      />
 
       {/* Stars */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {STARS.map((s) => <StarParticle key={s.id} {...s} />)}
+        {STARS.map(s => (
+          <motion.div
+            key={s.id}
+            className="absolute rounded-full bg-white"
+            style={{ left: `${s.x}%`, top: `${s.y}%`, width: s.size, height: s.size }}
+            animate={{ opacity: [0.1, 0.7, 0.1], scale: [0.8, 1.2, 0.8] }}
+            transition={{ duration: s.dur, delay: s.delay, repeat: Infinity, ease: "easeInOut" }}
+          />
+        ))}
       </div>
 
-      {/* Floating hearts */}
+      {/* Floating particles */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {HEARTS.map((h) => <FloatingHeart key={h.id} {...h} />)}
+        {PARTICLES.map(p => (
+          <motion.div
+            key={p.id}
+            className="absolute rounded-full bg-primary/25"
+            style={{ left: `${p.x}%`, top: `${p.y}%`, width: p.size, height: p.size }}
+            animate={{ y: [0, -22, 0], opacity: [0, 0.7, 0], scale: [0.8, 1.3, 0.8] }}
+            transition={{ duration: p.dur, delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
+          />
+        ))}
       </div>
+
+      {/* Large heartbeat ring behind content */}
+      <motion.div
+        className="absolute rounded-full border border-primary/8 pointer-events-none"
+        style={{ width: 500, height: 500, left: "calc(50% - 250px)", top: "calc(50% - 250px)" }}
+        animate={{ scale: [1, 1.08, 1], opacity: [0.15, 0.35, 0.15] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute rounded-full border border-primary/5 pointer-events-none"
+        style={{ width: 700, height: 700, left: "calc(50% - 350px)", top: "calc(50% - 350px)" }}
+        animate={{ scale: [1.05, 1, 1.05], opacity: [0.1, 0.25, 0.1] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+      />
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 flex flex-col items-center">
         <motion.span
-          className="text-primary font-medium tracking-[0.35em] uppercase text-xs mb-10 block"
+          className="text-primary font-medium tracking-[0.3em] uppercase text-xs mb-10 block"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
+          data-testid="text-hero-subtitle"
         >
           For My First Love
         </motion.span>
 
-        <div className="flex items-end justify-center mb-8" aria-label="Sradhaa">
+        {/* SRADHAAN letter by letter */}
+        <div className="flex items-end justify-center mb-8" aria-label="Sradhaan">
           {LETTERS.map((letter, i) => (
             <motion.span
               key={i}
-              className="font-serif text-[clamp(4rem,16vw,9rem)] leading-none text-foreground inline-block"
-              initial={{ opacity: 0, y: 40, filter: "blur(14px)" }}
+              className="font-serif leading-none text-foreground inline-block"
+              style={{ fontSize: "clamp(3.5rem,14vw,8.5rem)" }}
+              initial={{ opacity: 0, y: 40, filter: "blur(12px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 1, delay: 0.5 + i * 0.13, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.9, delay: 0.6 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
               data-testid={`text-hero-letter-${i}`}
             >
-              {letter === " " ? "\u00A0" : letter}
+              {letter}
             </motion.span>
           ))}
         </div>
 
-        <div className="h-12 mb-8 max-w-lg">
-          <p className="text-base md:text-lg text-muted-foreground italic font-serif leading-relaxed">
+        {/* Typewriter subtitle */}
+        <div className="h-8 mb-10">
+          <p className="text-lg md:text-xl text-muted-foreground italic font-serif">
             {displayed}
-            {!subtitleDone && (
+            {!done && (
               <motion.span
                 className="inline-block w-0.5 h-5 bg-primary/50 ml-0.5 align-middle"
                 animate={{ opacity: [1, 0, 1] }}
@@ -140,69 +152,56 @@ export function HeroSection() {
           </p>
         </div>
 
-        {/* Heartbeat pulse */}
+        {/* Heartbeat SVG */}
         <AnimatePresence>
-          {showPulse && (
+          {showHeart && (
             <motion.svg
               key="heartbeat"
-              viewBox="0 0 220 44"
-              className="w-52 md:w-72 mx-auto mb-6"
+              viewBox="0 0 200 40"
+              className="w-48 md:w-64 mx-auto"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6 }}
             >
               <motion.polyline
-                points="0,22 32,22 48,4 58,38 70,8 82,30 92,22 220,22"
+                points="0,20 30,20 45,5 55,35 65,10 75,28 85,20 200,20"
                 fill="none"
                 stroke="hsl(var(--primary))"
-                strokeWidth="2"
+                strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 0.6 }}
-                transition={{ duration: 1.4, ease: "easeInOut" }}
+                animate={{ pathLength: 1, opacity: 0.5 }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
               />
             </motion.svg>
           )}
         </AnimatePresence>
 
-        {/* Anniversary glass badge */}
+        {/* Date reveal */}
         <AnimatePresence>
-          {showBadge && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="relative mt-2"
+          {showDate && (
+            <motion.span
+              className="text-primary font-medium tracking-[0.25em] text-sm mt-6 block"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              data-testid="text-hero-date"
             >
-              <motion.div
-                className="relative rounded-2xl px-8 py-4 text-center"
-                style={{
-                  background: "linear-gradient(135deg, hsl(345 80% 95% / 0.7), hsl(20 80% 96% / 0.5))",
-                  backdropFilter: "blur(16px)",
-                  border: "1px solid hsl(345 70% 80% / 0.4)",
-                  boxShadow: "0 0 40px hsl(345 80% 70% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.4)",
-                }}
-                animate={{ boxShadow: ["0 0 30px hsl(345 80% 70% / 0.2)", "0 0 55px hsl(345 80% 70% / 0.4)", "0 0 30px hsl(345 80% 70% / 0.2)"] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <p className="text-primary text-xl mb-0.5">❤️</p>
-                <p className="font-serif text-lg text-foreground tracking-wide">July 3, 2026</p>
-                <p className="text-xs text-primary/70 tracking-widest uppercase mt-0.5 mb-1">365 Days of Love</p>
-                <p className="font-serif text-sm text-muted-foreground italic">"Every day with you has been my favorite chapter."</p>
-              </motion.div>
-            </motion.div>
+              July 3 &mdash; One Beautiful Year
+            </motion.span>
           )}
         </AnimatePresence>
 
         {/* Scroll hint */}
         <motion.div
-          className="mt-14 flex flex-col items-center gap-2"
+          className="mt-16 flex flex-col items-center gap-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 6.5, duration: 1 }}
+          transition={{ delay: 5.5, duration: 1 }}
         >
-          <span className="text-xs text-muted-foreground/40 tracking-widest uppercase">scroll</span>
+          <span className="text-xs text-muted-foreground/50 tracking-widest uppercase">scroll</span>
           <motion.div
             className="w-[1px] h-8 bg-primary/20 mx-auto"
             animate={{ scaleY: [0.3, 1, 0.3], opacity: [0.3, 0.7, 0.3] }}

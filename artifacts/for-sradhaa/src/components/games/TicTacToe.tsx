@@ -1,116 +1,84 @@
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import type { GameRoom } from "@/hooks/useGameSocket";
 
-interface Props {
-  room: GameRoom;
-  myPhone: string;
-  getName: (p: string) => string;
-  onMove: (move: Record<string, unknown>) => void;
-  onRestart: () => void;
-  onLeave: () => void;
+const WINS = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+function checkWinner(b: (string|null)[]) {
+  for (const [a,c,d] of WINS) if (b[a] && b[a] === b[c] && b[a] === b[d]) return b[a];
+  return b.every(Boolean) ? "draw" : null;
 }
 
-export function TicTacToe({ room, myPhone, getName, onMove, onRestart, onLeave }: Props) {
-  const state = room.state as {
-    board: (string | null)[];
-    symbols: Record<string, string>;
-    turn: string;
-    winner: string | null;
-    status: string;
-    scores: Record<string, number>;
-  };
+export function TicTacToe() {
+  const [board, setBoard] = useState<(string|null)[]>(Array(9).fill(null));
+  const [turn, setTurn] = useState<"X"|"O">("X");
+  const [scores, setScores] = useState({ X: 0, O: 0 });
+  const winner = checkWinner(board);
 
-  const mySymbol = state.symbols?.[myPhone];
-  const isMyTurn = state.turn === myPhone;
-  const winner = state.winner;
-  const isDraw = winner === "draw";
-  const iWon = winner === myPhone;
+  function click(i: number) {
+    if (board[i] || winner) return;
+    const nb = [...board];
+    nb[i] = turn;
+    const w = checkWinner(nb);
+    if (w && w !== "draw") setScores(s => ({ ...s, [w]: s[w as "X"|"O"] + 1 }));
+    setBoard(nb);
+    setTurn(t => t === "X" ? "O" : "X");
+  }
+
+  function reset() { setBoard(Array(9).fill(null)); setTurn("X"); }
+
+  const cellClass = (v: string|null) =>
+    v === "X" ? "text-rose-400" : v === "O" ? "text-yellow-300" : "text-transparent hover:text-white/10";
 
   return (
-    <div className="flex flex-col items-center gap-6 w-full max-w-sm mx-auto">
-      {/* Scores */}
-      <div className="flex justify-between w-full gap-4">
-        {room.players.map((p) => (
-          <div key={p} className="flex-1 rounded-2xl p-3 text-center" style={{ background: state.turn === p && !winner ? "hsl(var(--primary) / 0.12)" : "hsl(var(--card))", border: "1px solid hsl(var(--primary) / 0.15)" }}>
-            <p className="text-xs text-muted-foreground mb-0.5">{getName(p)}{p === myPhone ? " (you)" : ""}</p>
-            <p className="text-2xl">{state.symbols?.[p] ?? "?"}</p>
-            <p className="font-serif text-xl text-primary">{state.scores?.[p] ?? 0}</p>
+    <div className="flex flex-col items-center gap-5 py-4">
+      {/* Score */}
+      <div className="flex gap-8 text-center">
+        {[["Prathish (X)", "X"], ["Sradhaan (O)", "O"]].map(([name, sym]) => (
+          <div key={sym}>
+            <p className="text-xs text-muted-foreground mb-1">{name}</p>
+            <p className="font-serif text-3xl text-primary">{scores[sym as "X"|"O"]}</p>
           </div>
         ))}
       </div>
 
-      {/* Turn / Result */}
+      {/* Status */}
       <AnimatePresence mode="wait">
-        {winner ? (
-          <motion.div
-            key="result"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="text-center"
-          >
-            {isDraw ? (
-              <p className="font-serif text-2xl">It's a draw! 🤝</p>
-            ) : iWon ? (
-              <div>
-                <p className="font-serif text-2xl text-primary">You won! 🎉</p>
-                <div className="flex justify-center gap-1 mt-1">
-                  {Array.from({ length: 5 }, (_, i) => (
-                    <motion.span key={i} animate={{ y: [0, -10, 0] }} transition={{ delay: i * 0.1, repeat: 3, duration: 0.4 }} className="text-lg">⭐</motion.span>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <p className="font-serif text-2xl text-muted-foreground">{getName(winner)} wins! 💪</p>
-            )}
-          </motion.div>
-        ) : (
-          <motion.p key="turn" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-sm text-muted-foreground">
-            {isMyTurn ? <span className="text-primary font-medium">Your turn ({mySymbol})</span> : `${getName(state.turn)}'s turn…`}
-          </motion.p>
-        )}
+        <motion.p
+          key={winner ?? turn}
+          className="text-sm tracking-wide"
+          initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+        >
+          {winner === "draw" ? "🤝 It's a draw!" : winner ? `🎉 ${winner === "X" ? "Prathish" : "Sradhaan"} wins!` : `${turn === "X" ? "Prathish (X)" : "Sradhaan (O)"}'s turn`}
+        </motion.p>
       </AnimatePresence>
 
       {/* Board */}
-      <div className="grid grid-cols-3 gap-2 w-full">
-        {state.board?.map((cell, i) => (
+      <div className="grid grid-cols-3 gap-2">
+        {board.map((v, i) => (
           <motion.button
             key={i}
-            onClick={() => !cell && !winner && isMyTurn && onMove({ index: i })}
-            className="aspect-square rounded-2xl text-3xl flex items-center justify-center select-none"
-            style={{
-              background: "hsl(var(--card))",
-              border: "1.5px solid hsl(var(--primary) / 0.2)",
-              cursor: !cell && !winner && isMyTurn ? "pointer" : "default",
-            }}
-            whileHover={!cell && !winner && isMyTurn ? { scale: 1.04, background: "hsl(var(--primary) / 0.08)" } : {}}
-            whileTap={!cell && !winner && isMyTurn ? { scale: 0.96 } : {}}
+            onClick={() => click(i)}
+            className={`w-20 h-20 rounded-xl border border-white/10 text-4xl font-serif flex items-center justify-center transition-all ${cellClass(v)}`}
+            style={{ background: "rgba(255,255,255,0.04)", backdropFilter: "blur(8px)" }}
+            whileHover={!v && !winner ? { scale: 1.06, background: "rgba(255,255,255,0.08)" } : {}}
+            whileTap={!v && !winner ? { scale: 0.95 } : {}}
           >
-            <AnimatePresence>
-              {cell && (
-                <motion.span
-                  key={cell + i}
-                  initial={{ scale: 0, rotate: -20 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ type: "spring", bounce: 0.5 }}
-                >
-                  {cell}
-                </motion.span>
-              )}
-            </AnimatePresence>
+            {v && (
+              <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 400 }}>
+                {v}
+              </motion.span>
+            )}
           </motion.button>
         ))}
       </div>
 
-      {/* Actions */}
-      {winner && (
-        <div className="flex gap-3 w-full">
-          <button onClick={onRestart} className="flex-1 py-3 rounded-2xl bg-primary text-primary-foreground text-sm font-medium">Play Again</button>
-          <button onClick={onLeave} className="flex-1 py-3 rounded-2xl border border-primary/20 text-sm text-muted-foreground">Leave</button>
-        </div>
-      )}
-      {!winner && (
-        <button onClick={onLeave} className="text-xs text-muted-foreground/50 hover:text-muted-foreground mt-2">← Leave game</button>
-      )}
+      <motion.button
+        onClick={reset}
+        className="px-6 py-2.5 rounded-full border border-primary/30 text-sm text-primary hover:bg-primary/10 transition-colors"
+        whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
+      >
+        New Game
+      </motion.button>
     </div>
   );
 }

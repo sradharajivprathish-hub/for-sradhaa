@@ -1,0 +1,88 @@
+# 💌 Our Love Story Website — Full Build Prompt
+
+## Vision
+Build a premium, cinematic, interactive love-story website — not a normal anniversary page. Every section should feel unique, emotional, and beautiful, like turning pages in a living memory book. The end goal: she scrolls through our journey and reaches the last page in happy tears. This should be one of the most unforgettable gifts she's ever received.
+
+Overall aesthetic to apply everywhere: glassmorphism, romantic gradients, floating hearts, soft glow effects, cinematic transitions, elegant scroll-based animations, premium typography, dreamy backgrounds, magical hover states, 60 FPS smoothness, mobile-first and fully responsive. No section should feel repetitive — each one gets its own visual identity.
+
+---
+
+## 1. Landing Screen (before the site opens)
+- Full-viewport (100vw x 100vh) intro screen with soft romantic lighting and subtle background animation.
+- **PRATHISH** in large premium typography, fixed on the left. **SRADHA** in matching style, fixed on the right.
+- A large glowing heart floats/pulses at top-center.
+- User drags the heart down to the exact center — it follows finger/cursor smoothly.
+- On reaching center: heart snaps into place with glow, sparkles, and soft haptic vibration (supported devices).
+- Heart lock triggers: bright glow burst → particle animation spreads across screen → both names fade and drift toward center → premium zoom-and-fade transition into the main site.
+- No "Click to Enter" button or text — entry happens only through the drag gesture.
+
+## 2. Hero Section
+Headline: **"The moment I found you, my heart already knew its home."**
+Large, elegant typography with soft entrance animation and a gently animated romantic background.
+
+## 3. Anniversary Badge
+Replace the plain date line with a glowing glass badge:
+> ❤️ July 3, 2026
+> 365 Days of Love
+> "Every day with you has been my favorite chapter."
+
+Soft ambient glow animation, floating slightly, glass-card styling.
+
+## 4. Relationship Timer (on the home page)
+An interactive card: **"How Long Have We Been Together?"**
+Tapping it smoothly expands into a live counter showing Years / Months / Days / Hours / Minutes / Seconds, updating in real time with an elegant unfold animation.
+
+## 5. Our Story — Interactive Storybook Timeline
+Merge all narrative sections ("Our Story," "Story First," "Story of Us") into **one** immersive storybook-style timeline covering the full journey from first meeting to today.
+- Chapters open like turning pages of a book.
+- Each chapter: photos, soft transitions, floating hearts, cinematic pacing.
+- Should feel like reading our story, not scrolling a webpage.
+
+## 6. "The Universe I Found You"
+Keep the existing content but redesign every card individually — no two cards should look alike. Draw from: floating planets, starfields, glass cards, heart particle animations, aurora gradients, dreamy lighting. Weave in our existing photos naturally.
+
+## 7. Six Memories Challenge (unlock game)
+Photo gallery replaced with a locked-memory game. Each memory unlocks only after answering its question correctly.
+- ✅ Correct → success animation → photo reveal → romantic message.
+- ❌ Incorrect → "❌ Incorrect Answer — Try again, my love ❤️"
+
+| Memory | Question | Correct Answer |
+|---|---|---|
+| 1 | What is my favorite color? | Pink |
+| 2 | On which date did I propose and we officially became a couple? | September 15 |
+| 3 | On which date did we break up? | December 9 |
+| 4 | Who is the best couple forever? | Us ❤️ |
+| 5 | Who are our closest friends? | Udaya & Nishant |
+| 6 | Who does Prathish love the most in the whole world? | Sradha ❤️ (from ~200 funny/random wrong options) |
+
+## 8. Proposal Video Reveal
+Show a card: **"🎁 Tap to Reveal."** Tapping triggers a smooth cinematic transition that reveals the proposal video — no autoplay before the tap.
+
+## 9. Private Chat Room (on the home page)
+Move "Our Private Space" to be a main homepage feature — styled as a premium, exclusive private messaging room for just the two of you.
+
+## 10. Our Games — Play Together Space
+A dedicated multiplayer hub, styled like the rest of the site (glassmorphism, gradients, floating hearts, premium icons).
+
+**Real-time multiplayer:** create/join a room, live moves with no refresh, online status, invite/join button, player names, turn indicator, timer where relevant, victory/celebration animations.
+
+**Game library:** Chess, Ludo, UNO, Carrom, Tic-Tac-Toe, Connect Four, Memory Card Match, Quiz Challenge, Draw & Guess, Dots and Boxes, Playing Cards, Rock Paper Scissors, Number Guessing, Mini Arcade Games, Puzzle Challenges — plus any other fun two-player games that fit.
+
+**Lobby:** create a private room, join a room, see who's online, invite instantly, start together — kept simple and elegant.
+
+**Post-match:** show winner, celebration animation, running win/loss/draw record, play-again or switch-game options. Every game stays inside the site — in-app pages/modals only, no external tabs or redirects.
+
+## 11. Real-Time Voice Chat
+Private, low-latency voice calling between just the two registered users.
+- Start Voice Chat / End Voice Chat / Mute-Unmute buttons.
+- Clear indicators for: connected, muted, other person speaking.
+- Fully private — accessible only between the two of you.
+
+## 12. Polish & Fixes
+- **Number Guessing Game:** fix number generation, guess validation, "too high/low" hints, win detection, and clean restart — smooth and bug-free.
+- **Background music:** remove entirely. No autoplay, no restart on refresh, silent by default — sound only happens intentionally via voice chat.
+
+---
+
+## Final Goal
+Not a website — a journey. A digital love story where every click reveals another memory, every animation feels intentional, and every detail says *you are loved, chosen, and cherished.* Built with maximum creativity, elegance, and emotional storytelling.

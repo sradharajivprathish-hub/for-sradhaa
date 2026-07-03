@@ -1,0 +1,329 @@
+MASTER PROMPT – Build a Premium, Futuristic, Highly Animated Love Website
+
+Create an ultra-premium, futuristic, highly animated, emotional, and interactive couple website that feels like a luxury digital experience. The website must be mobile-first, fully responsive, lightning-fast, and incredibly smooth (60 FPS animations). Every page should feel alive with elegant motion, glowing effects, premium transitions, and cinematic interactions.
+
+Overall Design Style
+
+The website should have:
+
+- Premium luxury UI/UX
+- Futuristic design
+- Glassmorphism
+- Soft neon glow
+- Floating particles
+- Animated gradients
+- Aurora lighting effects
+- Smooth scrolling
+- Blur transitions
+- Floating hearts
+- Romantic atmosphere
+- Elegant typography
+- Premium icons
+- Dynamic backgrounds
+- Modern cards
+- Beautiful shadows
+- High-end animations
+- Responsive layout for every mobile device
+- Perfect support for Android, iPhone, tablets, and desktops
+
+Everything should look unique—not like a normal website.
+
+---
+
+Opening Animation (Only Once)
+
+When the website is opened for the first time:
+
+Display
+
+Left:
+PRATHISH
+
+Right:
+SRADHAAN
+
+(Correct every occurrence of the name to SRADHAAN.)
+
+Both names must be perfectly straight and horizontally aligned.
+
+Create a cinematic animation:
+
+- The names slowly move toward each other.
+- A glowing heart appears between them.
+- The heart starts beating realistically.
+- Light particles spread across the screen.
+- A glowing pulse expands from the heart.
+- Beautiful romantic music can optionally fade in.
+- Soft bloom and glow effects appear.
+- Everything should feel magical and emotional.
+
+After the animation finishes, automatically enter the homepage.
+
+This opening animation must appear only once and never repeat unless the browser cache is cleared.
+
+---
+
+Homepage (Front Page)
+
+The homepage should immediately impress visitors.
+
+The entire front page should feel alive.
+
+Add:
+
+- Animated heartbeat effect in the background.
+- Large glowing animated heart.
+- Floating hearts moving slowly.
+- Heart pulse synchronized with the background.
+- Particle explosions.
+- Aurora lighting.
+- Animated stars.
+- Floating glowing circles.
+- Soft wave animations.
+- Dynamic gradient backgrounds.
+- Mouse/touch interaction effects.
+- Ripple animations.
+- Floating glass cards.
+- Animated borders.
+- Smooth entrance animations.
+- Cinematic page transitions.
+
+The homepage should feel like a premium interactive experience rather than a normal website.
+
+---
+
+Relationship Counter
+
+Create one premium glassmorphism card.
+
+Title:
+
+How Long We Have Been Together ❤️
+
+Display everything in one straight horizontal line:
+
+Days | Hours | Minutes | Seconds
+
+Requirements:
+
+- Never stack vertically.
+- No wrapping.
+- Animated number changes.
+- Beautiful glowing border.
+- Glass effect.
+- Responsive.
+- Smooth transitions.
+
+---
+
+Our Story
+
+Merge both existing story sections into one elegant section.
+
+Requirements:
+
+- Beautiful storytelling layout.
+- Timeline animation.
+- Scroll reveal.
+- Floating heart effects.
+- Smooth fade animation.
+- Premium typography.
+- Elegant cards.
+- Romantic transitions.
+- Cinematic appearance.
+- Interactive scrolling.
+
+---
+
+Six Memories
+
+Keep the current Six Memories section.
+
+Upgrade it by adding:
+
+- Hover zoom.
+- Glow effect.
+- Smooth image loading.
+- Animated frames.
+- Better spacing.
+- High-quality transitions.
+- Floating animations.
+- Premium gallery experience.
+
+---
+
+Moments
+
+Keep the Moments section.
+
+Enhance it with:
+
+- Scroll animations.
+- Fade effects.
+- Image reveal.
+- Floating transitions.
+- Beautiful card animations.
+- Parallax movement.
+- Premium visual effects.
+
+---
+
+Chat With Me
+
+Remove the current Private Space section.
+
+Instead create a beautiful animated card on the homepage.
+
+Title:
+
+Chat With Me ❤️
+
+When clicked:
+
+Ask for a mobile number.
+
+Only the two predefined mobile numbers should be accepted.
+
+If the entered number matches one of the authorized numbers:
+
+- Allow access.
+- Show a premium unlock animation.
+
+If incorrect:
+
+- Show an elegant Access Denied animation.
+
+No page reload.
+
+Everything should be animated.
+
+---
+
+Play Together Section
+
+Create a beautiful premium gaming section.
+
+Title:
+
+Play Together 🎮
+
+Every game must run inside the website.
+
+Do NOT redirect users to another website.
+
+Include as many two-player games as possible, such as:
+
+- Ludo
+- Carrom Board
+- Tic Tac Toe (XO)
+- Chess
+- Checkers
+- Connect Four
+- Snake & Ladder
+- Dots and Boxes
+- Memory Match
+- Rock Paper Scissors
+- Hangman
+- Quiz Battle
+- Sudoku
+- Number Guessing
+- Word Puzzle
+- Dice Battle
+- Pong
+- Air Hockey
+- Racing Mini Game
+- Flip Cards
+- Color Match
+- Four in a Row
+- Puzzle Challenge
+- Reaction Battle
+- Emoji Guess
+- Truth Challenge
+- Spin the Wheel
+- Couple Quiz
+
+Every game should have:
+
+- Beautiful animations.
+- Premium UI.
+- Responsive controls.
+- Smooth gameplay.
+- Mobile optimization.
+- Save progress where possible.
+
+---
+
+Photos
+
+Upgrade every photo.
+
+Requirements:
+
+- Better quality.
+- Lazy loading.
+- Smooth fade.
+- Premium frame.
+- Hover animation.
+- Light reflection.
+- Zoom effect.
+- Responsive layout.
+- Elegant gallery.
+
+---
+
+Animations
+
+The entire website should always feel alive.
+
+Include:
+
+- Floating hearts.
+- Heartbeat animations.
+- Ripple effects.
+- Mouse interaction.
+- Touch interaction.
+- Button animations.
+- Icon animations.
+- Scroll reveal.
+- Glass reflections.
+- Glow transitions.
+- Floating particles.
+- Animated gradients.
+- Blur transitions.
+- Premium page transitions.
+- Motion effects.
+- Dynamic backgrounds.
+- Neon lighting.
+- Soft bloom.
+- Aurora effects.
+- Animated borders.
+- Floating shadows.
+- Smooth loading animations.
+- Skeleton loaders.
+- Beautiful hover effects.
+
+No section should look static.
+
+---
+
+Performance
+
+Requirements:
+
+- Mobile-first design.
+- Fast loading.
+- SEO optimized.
+- Responsive.
+- Accessibility friendly.
+- No lag.
+- No layout shifts.
+- Optimized images.
+- Smooth 60 FPS animations.
+- Clean code.
+- Modern architecture.
+
+---
+
+Final Goal
+
+The final result should look like one of the world's best romantic websites, combining luxury UI, futuristic animations, emotional storytelling, premium interactions, and a beautiful gaming experience. Every section should feel cinematic, interactive, and unforgettable. The homepage should instantly amaze users with realistic heartbeat animations, floating hearts, glowing effects, magical transitions, and a polished premium experience while maintaining excellent performance on all mobile devices.
