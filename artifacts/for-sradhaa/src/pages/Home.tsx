@@ -662,12 +662,6 @@ function PromiseSection() {
         >
           I love you. Yesterday. Today. Tomorrow. Forever.
         </motion.p>
-
-        {/* Chat With Me */}
-        <div>
-          <div className="w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent mb-12" />
-          <ChatWithMe />
-        </div>
       </motion.div>
     </section>
   );
