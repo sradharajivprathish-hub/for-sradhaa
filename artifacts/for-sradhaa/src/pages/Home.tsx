@@ -6,7 +6,6 @@ import { LoveCards } from "@/components/LoveCards";
 import { LoveCounter } from "@/components/LoveCounter";
 import { HeroSection } from "@/components/HeroSection";
 import { MemoriesGame } from "@/components/MemoriesGame";
-import { GamesHub } from "@/components/GamesHub";
 import { StorybookSection } from "@/components/StorybookSection";
 import proposalVideo from "@assets/pro.video_1783005492797.mp4";
 
@@ -15,6 +14,40 @@ const MOMENT_PASSWORD = "143";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const ALLOWED = ["919944293646", "919940739865"];
+
+// ── Play Together section — links to /games page ─────────────────────────────
+function PlayTogetherSection() {
+  const [, navigate] = useLocation();
+
+  return (
+    <section className="relative py-24 px-6 z-10 bg-primary/5">
+      <div className="max-w-5xl mx-auto">
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <p className="text-primary/60 tracking-widest uppercase text-xs mb-3">Play Together</p>
+          <h2 className="font-serif text-4xl md:text-5xl mb-4">Our Game Room</h2>
+          <p className="text-muted-foreground mb-8">
+            Tic-Tac-Toe, Connect Four, Rock Paper Scissors & more — live multiplayer, just the two of us.
+          </p>
+          <motion.button
+            onClick={() => navigate("/games")}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-medium text-base"
+            style={{ boxShadow: "0 4px 24px rgba(244,63,94,0.35)" }}
+            whileHover={{ scale: 1.05, boxShadow: "0 6px 36px rgba(244,63,94,0.5)" }}
+            whileTap={{ scale: 0.97 }}
+          >
+            🎮 Play Games
+          </motion.button>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 
 // ── Floating icon buttons (Chat left, Games right) ──────────────────────────
 function FloatingIcons({
@@ -702,7 +735,7 @@ export default function Home() {
 
       {/* Play Together */}
       <div ref={gamesRef}>
-        <GamesHub />
+        <PlayTogetherSection />
       </div>
 
       {/* A Promise */}

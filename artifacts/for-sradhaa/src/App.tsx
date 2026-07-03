@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { LandingScreen } from "@/components/LandingScreen";
 import Home from "@/pages/Home";
 import Chat from "@/pages/Chat";
+import Games from "@/pages/Games";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -11,6 +12,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/chat" component={Chat} />
+      <Route path="/games" component={Games} />
       <Route component={NotFound} />
     </Switch>
   );
