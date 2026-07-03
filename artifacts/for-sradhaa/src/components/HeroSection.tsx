@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const LETTERS = "Sradha".split("");
-const SUBTITLE = "A love that began in silence, growing louder every day.";
+const SUBTITLE = "Every heartbeat of mine has been writing your name since the day we met.";
 
 function useTypewriter(text: string, speed = 45, startDelay = 2800) {
   const [displayed, setDisplayed] = useState("");
