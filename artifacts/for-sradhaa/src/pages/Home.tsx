@@ -11,7 +11,7 @@ import { StorybookSection } from "@/components/StorybookSection";
 import proposalVideo from "@assets/pro.video_1783005492797.mp4";
 
 // ─── Change this to your desired password ────────────────────────────────────
-const MOMENT_PASSWORD = "sradha0915";
+const MOMENT_PASSWORD = "143";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const ALLOWED = ["919944293646", "919940739865"];
