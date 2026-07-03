@@ -158,7 +158,7 @@ export function LandingScreen({ onEnter }: Props) {
           </AnimatePresence>
         </div>
 
-        {/* SRADHAAN — slides from right */}
+        {/* SRADHA — slides from right */}
         <motion.div
           initial={{ x: "55vw", opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -170,7 +170,7 @@ export function LandingScreen({ onEnter }: Props) {
             animate={phase === "leaving" ? { x: "40vw", opacity: 0 } : {}}
             transition={{ duration: 0.7, ease: "easeInOut" }}
           >
-            SRADHAAN
+            SRADHA
           </motion.p>
         </motion.div>
       </div>

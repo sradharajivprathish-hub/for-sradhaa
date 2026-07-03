@@ -59,7 +59,7 @@ export function ConnectFour() {
         </div>
         <div>
           <div className="w-3 h-3 rounded-full bg-yellow-400 mx-auto mb-1" />
-          <p className="text-xs text-muted-foreground">Sradhaan</p>
+          <p className="text-xs text-muted-foreground">Sradha</p>
           <p className="font-serif text-2xl text-yellow-300">{scores[2]}</p>
         </div>
       </div>
@@ -71,7 +71,7 @@ export function ConnectFour() {
           className="text-sm"
           initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
         >
-          {winner ? `🎉 ${winner === 1 ? "Prathish" : "Sradhaan"} wins!` : `${turn === 1 ? "🔴 Prathish" : "🟡 Sradhaan"}'s turn`}
+          {winner ? `🎉 ${winner === 1 ? "Prathish" : "Sradha"} wins!` : `${turn === 1 ? "🔴 Prathish" : "🟡 Sradha"}'s turn`}
         </motion.p>
       </AnimatePresence>
 

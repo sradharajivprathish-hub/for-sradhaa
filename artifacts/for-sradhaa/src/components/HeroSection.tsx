@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const LETTERS = "Sradhaan".split("");
+const LETTERS = "Sradha".split("");
 const SUBTITLE = "A love that began in silence, growing louder every day.";
 
 function useTypewriter(text: string, speed = 45, startDelay = 2800) {
@@ -121,8 +121,8 @@ export function HeroSection() {
           For My First Love
         </motion.span>
 
-        {/* SRADHAAN letter by letter */}
-        <div className="flex items-end justify-center mb-8" aria-label="Sradhaan">
+        {/* SRADHA letter by letter */}
+        <div className="flex items-end justify-center mb-8" aria-label="Sradha">
           {LETTERS.map((letter, i) => (
             <motion.span
               key={i}

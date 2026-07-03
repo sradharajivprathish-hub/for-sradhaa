@@ -1,0 +1,94 @@
+Website Improvement & Design Instructions
+
+I want this website to feel premium, emotional, interactive, and highly animated. It should look like a website that took a lot of effort to create. Every section should have smooth transitions, beautiful effects, and modern animations. The overall experience should make visitors say, "Wow!"
+
+1. Opening Screen
+
+- Correct the names:
+  - PRATHISH (Correct spelling)
+  - SRADHA (Correct spelling)
+- Change "SRADHAAN" to "SRADHA" everywhere on the website.
+- Add a beautiful opening animation before the website loads.
+- The names should appear with an elegant cinematic animation.
+- A glowing heart should appear between the names with a realistic heartbeat effect.
+- Add romantic particles, light effects, floating hearts, and smooth transitions to make the opening feel magical.
+- This opening animation should play only once when the website is opened.
+
+2. Story Section
+
+There are currently two sections:
+
+- Our Story
+- The Story of Us
+
+Combine both into a single beautiful section with the best possible title and design. Make it emotional, elegant, and visually attractive with smooth animations.
+
+3. "The Universe I Found You"
+
+Keep this section, but make it much more beautiful.
+
+- Add elegant decorations.
+- Add animated stars, glowing effects, soft gradients, and smooth transitions.
+- Make the entire section feel magical and premium.
+
+4. Six Memories
+
+This section is perfect.
+No changes are needed.
+
+5. The Moment
+
+Create a completely different experience.
+
+- Before opening this section, display a beautiful password screen.
+- I will manually set the password later.
+- After entering the correct password, reveal a surprise marriage video with a cinematic transition.
+- Make the entire experience feel like unlocking a secret memory.
+
+6. Play Together
+
+This should become a real-time online multiplayer feature.
+
+- When I log in using my phone number, it should display Prathish.
+- When Sradha logs in using her phone number, it should display Sradha.
+- Both users should automatically connect online.
+- We should be able to play games together in real time as a duo.
+- The multiplayer experience should feel smooth, modern, and interactive.
+
+7. The Promise
+
+Keep this section but redesign it completely.
+
+- Add premium animations.
+- Use elegant decorative elements.
+- Include glowing effects and beautiful transitions.
+- Make it feel emotional and visually impressive.
+
+8. Front Page Layout
+
+On the home page:
+
+- Place a small Gaming icon on the right side.
+- Place a small Chat with Me icon on the left side.
+- These icons should float elegantly with smooth animations.
+- Clicking each icon should open its respective feature.
+
+9. Overall Website Design
+
+The entire website should be filled with:
+
+- Premium animations
+- Smooth page transitions
+- Floating elements
+- Heartbeat effects
+- Glow effects
+- Beautiful particle animations
+- Modern UI
+- Romantic visual effects
+- Cinematic loading animations
+- Interactive hover effects
+- Elegant typography
+- High-quality responsiveness
+- A luxury look and feel
+
+The website should look unique, emotional, highly interactive, and professionally designed. Every page should feel alive with animations, making the entire experience memorable and visually stunning.

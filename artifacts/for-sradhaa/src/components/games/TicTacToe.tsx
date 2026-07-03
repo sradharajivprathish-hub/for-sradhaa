@@ -33,7 +33,7 @@ export function TicTacToe() {
     <div className="flex flex-col items-center gap-5 py-4">
       {/* Score */}
       <div className="flex gap-8 text-center">
-        {[["Prathish (X)", "X"], ["Sradhaan (O)", "O"]].map(([name, sym]) => (
+        {[["Prathish (X)", "X"], ["Sradha (O)", "O"]].map(([name, sym]) => (
           <div key={sym}>
             <p className="text-xs text-muted-foreground mb-1">{name}</p>
             <p className="font-serif text-3xl text-primary">{scores[sym as "X"|"O"]}</p>
@@ -48,7 +48,7 @@ export function TicTacToe() {
           className="text-sm tracking-wide"
           initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
         >
-          {winner === "draw" ? "🤝 It's a draw!" : winner ? `🎉 ${winner === "X" ? "Prathish" : "Sradhaan"} wins!` : `${turn === "X" ? "Prathish (X)" : "Sradhaan (O)"}'s turn`}
+          {winner === "draw" ? "🤝 It's a draw!" : winner ? `🎉 ${winner === "X" ? "Prathish" : "Sradha"} wins!` : `${turn === "X" ? "Prathish (X)" : "Sradha (O)"}'s turn`}
         </motion.p>
       </AnimatePresence>
 
