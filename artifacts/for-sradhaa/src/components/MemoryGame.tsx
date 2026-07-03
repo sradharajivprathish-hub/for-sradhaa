@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import photo1 from "@assets/WhatsApp_Image_2026-07-02_at_8.45.58_PM_1783005492798.jpeg";
 import photo2 from "@assets/WhatsApp_Image_2026-07-02_at_8.45.59_PM_(1)_1783005492798.jpeg";
 import photo3 from "@assets/WhatsApp_Image_2026-07-02_at_8.45.59_PM_(2)_1783005492799.jpeg";
-import photo4 from "@assets/WhatsApp_Image_2026-07-02_at_8.45.59_PM_1783018729670.jpeg";
-import photo5 from "@assets/WhatsApp_Image_2026-07-02_at_8.46.00_PM_(1)_1783018729672.jpeg";
-import photo6 from "@assets/WhatsApp_Image_2026-07-02_at_8.46.00_PM_1783018729673.jpeg";
+import photo4 from "@assets/WhatsApp_Image_2026-07-02_at_8.45.59_PM_1783005492800.jpeg";
+import photo5 from "@assets/WhatsApp_Image_2026-07-02_at_8.46.00_PM_(1)_1783005492800.jpeg";
+import photo6 from "@assets/WhatsApp_Image_2026-07-02_at_8.46.00_PM_1783005492801.jpeg";
 
 const FUNNY_WRONG = [
   "Pizza 🍕", "WiFi password 📶", "His phone charger 🔋", "Netflix 📺", "His pillow 🛏️",

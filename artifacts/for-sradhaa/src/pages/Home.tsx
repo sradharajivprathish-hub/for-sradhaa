@@ -7,7 +7,7 @@ import { LoveCounter } from "@/components/LoveCounter";
 import { HeroSection } from "@/components/HeroSection";
 import { MemoriesGame } from "@/components/MemoriesGame";
 import { GamesHub } from "@/components/GamesHub";
-import proposalVideo from "@assets/pro.video_1783069935327.mp4";
+import proposalVideo from "@assets/pro.video_1783005492797.mp4";
 
 const ALLOWED = ["919944293646", "919940739865"];
 
