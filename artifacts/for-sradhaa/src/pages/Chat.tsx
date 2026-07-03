@@ -52,7 +52,6 @@ export default function Chat() {
     return saved ? JSON.parse(saved) : null;
   });
   const [loginPhone, setLoginPhone] = useState("");
-  const [loginPin, setLoginPin] = useState("");
   const [loginError, setLoginError] = useState("");
   const [loginLoading, setLoginLoading] = useState(false);
 
@@ -141,7 +140,7 @@ export default function Chat() {
       const res = await fetch(`${API_BASE}/chat/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: loginPhone, pin: loginPin }),
+        body: JSON.stringify({ phone: loginPhone }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -233,46 +232,40 @@ export default function Chat() {
           transition={{ duration: 0.7 }}
         >
           <div className="text-center mb-10">
-            <div className="w-16 h-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
+            <motion.div
+              className="w-16 h-16 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4"
+              animate={{ boxShadow: ["0 0 0px rgba(244,63,94,0.2)", "0 0 24px rgba(244,63,94,0.35)", "0 0 0px rgba(244,63,94,0.2)"] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="hsl(345 70% 45%)" strokeWidth="1.5">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               </svg>
-            </div>
-            <h1 className="font-serif text-3xl text-foreground mb-1">Our Space</h1>
-            <p className="text-sm text-muted-foreground">Private chat for two</p>
+            </motion.div>
+            <h1 className="font-serif text-3xl text-foreground mb-1">Heart Space 💕</h1>
+            <p className="text-sm text-muted-foreground">Private chat for two — enter your number to begin</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-xs text-muted-foreground mb-1.5 tracking-widest uppercase">Phone Number</label>
+              <label className="block text-xs text-muted-foreground mb-1.5 tracking-widest uppercase">Your Mobile Number</label>
               <input
                 type="tel"
                 value={loginPhone}
                 onChange={(e) => setLoginPhone(e.target.value)}
-                placeholder="919944293646"
-                className="w-full px-4 py-3 rounded-xl border border-primary/20 bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 text-sm"
+                onKeyDown={(e) => e.key === "Enter" && handleLogin(e as unknown as React.FormEvent)}
+                placeholder="e.g. 919944293646"
+                className="w-full px-4 py-3 rounded-xl border border-primary/20 bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 text-sm text-center tracking-wider"
                 data-testid="input-phone"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-xs text-muted-foreground mb-1.5 tracking-widest uppercase">Secret PIN</label>
-              <input
-                type="password"
-                value={loginPin}
-                onChange={(e) => setLoginPin(e.target.value)}
-                placeholder="Enter your shared PIN"
-                className="w-full px-4 py-3 rounded-xl border border-primary/20 bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 text-sm"
-                data-testid="input-pin"
+                autoFocus
                 required
               />
             </div>
 
             {loginError && (
               <motion.p
-                className="text-sm text-red-500 text-center"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                className="text-sm text-red-400 text-center"
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
               >
                 {loginError}
               </motion.p>
@@ -284,7 +277,7 @@ export default function Chat() {
               className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-medium text-sm tracking-wide disabled:opacity-60"
               data-testid="button-login"
             >
-              {loginLoading ? "Entering..." : "Enter Our Space"}
+              {loginLoading ? "Entering…" : "Enter Our Space ❤️"}
             </button>
           </form>
         </motion.div>
@@ -299,32 +292,44 @@ export default function Chat() {
     <div className="flex flex-col h-screen" style={{ background: "hsl(35 60% 97%)" }}>
 
       {/* Header */}
-      <div className="px-4 py-3 flex items-center gap-3 border-b border-primary/10 bg-card/80 backdrop-blur sticky top-0 z-20 shadow-sm">
-        <div className="relative">
-          <div className="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
-            <span className="font-serif text-primary text-base">
-              {user.name === "Prathish" ? "S" : "P"}
-            </span>
+      <div className="border-b border-primary/10 bg-card/80 backdrop-blur sticky top-0 z-20 shadow-sm">
+        {/* Welcome bar */}
+        <div className="px-4 pt-2.5 pb-1 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-primary/70 font-medium">Welcome,</span>
+            <span className="text-xs font-semibold text-primary">{user.name}</span>
+            <span className="text-xs text-muted-foreground/50">·</span>
+            <span className="text-xs text-muted-foreground/60 font-mono">+{user.phone}</span>
           </div>
-          {otherOnline && (
-            <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-green-400 border-2 border-background" />
-          )}
+          <button
+            onClick={handleLogout}
+            className="text-xs text-muted-foreground/50 hover:text-muted-foreground transition-colors"
+            data-testid="button-logout"
+          >
+            Leave
+          </button>
         </div>
-        <div className="flex-1">
-          <p className="font-medium text-sm text-foreground">
-            {user.name === "Prathish" ? "Sradhaa" : "Prathish"}
-          </p>
-          <p className="text-xs text-muted-foreground">
-            {otherOnline ? "online" : otherName ? "last seen recently" : "offline"}
-          </p>
+        {/* Chat partner row */}
+        <div className="px-4 pb-2.5 flex items-center gap-3">
+          <div className="relative">
+            <div className="w-9 h-9 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center">
+              <span className="font-serif text-primary text-sm">
+                {user.name === "Prathish" ? "S" : "P"}
+              </span>
+            </div>
+            {otherOnline && (
+              <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-green-400 border-2 border-background" />
+            )}
+          </div>
+          <div>
+            <p className="font-medium text-sm text-foreground leading-tight">
+              {user.name === "Prathish" ? "Sradhaa" : "Prathish"}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              {otherOnline ? "online" : otherName ? "last seen recently" : "offline"}
+            </p>
+          </div>
         </div>
-        <button
-          onClick={handleLogout}
-          className="text-xs text-muted-foreground hover:text-foreground px-2 py-1 rounded-lg"
-          data-testid="button-logout"
-        >
-          Leave
-        </button>
       </div>
 
       {/* Messages */}

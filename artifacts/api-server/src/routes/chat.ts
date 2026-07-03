@@ -12,26 +12,20 @@ const ALLOWED_PHONES: Record<string, string> = {
   "91994039865": "Sradhaa",
   "9199440398651": "Sradhaa",
 };
-const SHARED_PIN = "sradhaprathish";
 
 // POST /api/chat/login
 router.post("/chat/login", async (req, res): Promise<void> => {
-  const { phone, pin } = req.body as { phone?: string; pin?: string };
+  const { phone } = req.body as { phone?: string };
 
-  if (!phone || !pin) {
-    res.status(400).json({ error: "Phone and PIN are required" });
+  if (!phone) {
+    res.status(400).json({ error: "Phone number is required" });
     return;
   }
 
   const normalizedPhone = phone.replace(/\s+/g, "").replace(/^\+/, "");
 
   if (!ALLOWED_PHONES[normalizedPhone]) {
-    res.status(403).json({ error: "This number is not authorized to access this chat." });
-    return;
-  }
-
-  if (pin !== SHARED_PIN) {
-    res.status(401).json({ error: "Incorrect PIN." });
+    res.status(403).json({ error: "This number is not registered. Please check and try again." });
     return;
   }
 
